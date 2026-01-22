@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Идеи - Школьный Краудсорсинг</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Школьный Краудсорсинг</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+                <a href="projects.html" class="nav-link"><i class="fas fa-project-diagram"></i> Проекты</a>
+                <a href="ideas.html" class="nav-link active"><i class="fas fa-lightbulb"></i> Идеи</a>
+                <a href="vote.html" class="nav-link"><i class="fas fa-vote-yea"></i> Голосование</a>
+                <a href="login.html" class="nav-link login-btn" id="loginBtn"><i class="fas fa-user"></i> Войти</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Главная</a>
+        <a href="projects.html" class="mobile-nav-link"><i class="fas fa-project-diagram"></i> Проекты</a>
+        <a href="ideas.html" class="mobile-nav-link active"><i class="fas fa-lightbulb"></i> Идеи</a>
+        <a href="vote.html" class="mobile-nav-link"><i class="fas fa-vote-yea"></i> Голосование</a>
+        <a href="login.html" class="mobile-nav-link"><i class="fas fa-user"></i> Войти</a>
+    </div>
+
+    <!-- Заголовок страницы -->
+    <div class="page-header">
+        <div class="container">
+            <h1 id="pageTitle">Идеи для школы</h1>
+            <p id="pageDescription" class="page-description">Предложите свою идею или поддержите идеи других учеников</p>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container" id="ideasContainer">
+        <!-- Контент будет загружен через JavaScript -->
+        <div class="loading">Загрузка идей...</div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Школьный Краудсорсинг</h3>
+                <p>Платформа для совместной работы и улучшения школьной жизни</p>
+            </div>
+            <div class="footer-section">
+                <h3>Страницы</h3>
+                <a href="index.html">Главная</a>
+                <a href="projects.html">Проекты</a>
+                <a href="ideas.html">Идеи</a>
+                <a href="vote.html">Голосование</a>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>school-crowd@example.com</p>
+                <p>+7 (XXX) XXX-XX-XX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Школьный Краудсорсинг. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
