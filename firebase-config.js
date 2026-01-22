@@ -9,8 +9,45 @@ const firebaseConfig = {
 };
 
 // Инициализация Firebase
-firebase.initializeApp(firebaseConfig);
+try {
+    firebase.initializeApp(firebaseConfig);
+    console.log("Firebase инициализирован успешно!");
+} catch (error) {
+    console.error("Ошибка инициализации Firebase:", error);
+}
 
 // Инициализация сервисов
-const auth = firebase.auth();
-const db = firebase.firestore();
+let auth, db;
+try {
+    auth = firebase.auth();
+    db = firebase.firestore();
+    console.log("Сервисы Firebase загружены!");
+} catch (error) {
+    console.error("Ошибка загрузки сервисов Firebase:", error);
+    // Для демонстрации создаем заглушки
+    auth = {
+        currentUser: null,
+        signInWithEmailAndPassword: () => Promise.reject("Firebase не загружен"),
+        createUserWithEmailAndPassword: () => Promise.reject("Firebase не загружен"),
+        signOut: () => Promise.reject("Firebase не загружен"),
+        onAuthStateChanged: (callback) => {
+            callback(null);
+            return () => {};
+        }
+    };
+    
+    db = {
+        collection: () => ({
+            add: () => Promise.reject("Firebase не загружен"),
+            get: () => Promise.reject("Firebase не загружен"),
+            doc: () => ({
+                update: () => Promise.reject("Firebase не загружен"),
+                delete: () => Promise.reject("Firebase не загружен")
+            })
+        })
+    };
+}
+
+// Экспортируем для использования в других файлах
+window.firebaseAuth = auth;
+window.firebaseDb = db;
