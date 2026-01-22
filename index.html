@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школьный Краудсорсинг</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Школьный Краудсорсинг</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Главная</a>
+                <a href="projects.html" class="nav-link"><i class="fas fa-project-diagram"></i> Проекты</a>
+                <a href="ideas.html" class="nav-link"><i class="fas fa-lightbulb"></i> Идеи</a>
+                <a href="vote.html" class="nav-link"><i class="fas fa-vote-yea"></i> Голосование</a>
+                <a href="login.html" class="nav-link login-btn" id="loginBtn"><i class="fas fa-user"></i> Войти</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-nav-link active"><i class="fas fa-home"></i> Главная</a>
+        <a href="projects.html" class="mobile-nav-link"><i class="fas fa-project-diagram"></i> Проекты</a>
+        <a href="ideas.html" class="mobile-nav-link"><i class="fas fa-lightbulb"></i> Идеи</a>
+        <a href="vote.html" class="mobile-nav-link"><i class="fas fa-vote-yea"></i> Голосование</a>
+        <a href="login.html" class="mobile-nav-link"><i class="fas fa-user"></i> Войти</a>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Приветственная секция -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Школьный Краудсорсинг</h1>
+                <p>Платформа для совместной работы над школьными проектами, обмена идеями и голосования за лучшие предложения</p>
+                <div class="hero-buttons">
+                    <a href="ideas.html" class="btn btn-primary">Предложить идею</a>
+                    <a href="projects.html" class="btn btn-secondary">Смотреть проекты</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Школьный проект">
+            </div>
+        </section>
+
+        <!-- Статистика -->
+        <section class="stats">
+            <div class="stat-item">
+                <h3 id="activeProjectsCount">0</h3>
+                <p>Активных проектов</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="totalIdeasCount">0</h3>
+                <p>Предложенных идей</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="totalVotesCount">0</h3>
+                <p>Всего голосов</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="activeUsersCount">0</h3>
+                <p>Участников</p>
+            </div>
+        </section>
+
+        <!-- Последние идеи -->
+        <section class="section">
+            <h2>Последние идеи</h2>
+            <div class="ideas-grid" id="latestIdeas">
+                <!-- Идеи будут загружаться сюда -->
+                <div class="loading">Загрузка идей...</div>
+            </div>
+            <div class="text-center">
+                <a href="ideas.html" class="btn btn-outline">Смотреть все идеи</a>
+            </div>
+        </section>
+
+        <!-- Как это работает -->
+        <section class="section section-gray">
+            <h2>Как это работает</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Предложите идею</h3>
+                    <p>Расскажите о своей идее для улучшения школы: мероприятие, проект, изменение правил</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Соберите команду</h3>
+                    <p>Найдите единомышленников, которые помогут реализовать вашу идею</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Получите поддержку</h3>
+                    <p>Участвуйте в голосовании, собирайте голоса за лучшие идеи</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Реализуйте проект</h3>
+                    <p>Вместе с командой и поддержкой школы воплотите идею в жизнь</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Школьный Краудсорсинг</h3>
+                <p>Платформа для совместной работы и улучшения школьной жизни</p>
+            </div>
+            <div class="footer-section">
+                <h3>Страницы</h3>
+                <a href="index.html">Главная</a>
+                <a href="projects.html">Проекты</a>
+                <a href="ideas.html">Идеи</a>
+                <a href="vote.html">Голосование</a>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>school-crowd@example.com</p>
+                <p>+7 (XXX) XXX-XX-XX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Школьный Краудсорсинг. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
