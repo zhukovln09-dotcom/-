@@ -76,6 +76,46 @@ function checkFirebaseAuthStatus() {
     });
 }
 
+// Обновленная функция загрузки идей
+async function loadLatestIdeas() {
+    const ideasContainer = document.getElementById('latestIdeas');
+    if (!ideasContainer) return;
+    
+    try {
+        ideasContainer.innerHTML = '<div class="loading">Загрузка идей...</div>';
+        
+        // Загружаем из Firebase
+        if (window.firebaseDb) {
+            const querySnapshot = await window.firebaseDb.collection('ideas')
+                .orderBy('createdAt', 'desc')
+                .limit(3)
+                .get();
+            
+            if (!querySnapshot.empty) {
+                const ideas = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    // Форматируем дату
+                    formattedDate: doc.data().createdAt 
+                        ? new Date(doc.data().createdAt.toDate()).toLocaleDateString('ru-RU')
+                        : 'Дата не указана'
+                }));
+                
+                displayIdeas(ideas, ideasContainer);
+            } else {
+                ideasContainer.innerHTML = '<div class="loading">Идей пока нет. Будьте первым!</div>';
+            }
+        } else {
+            throw new Error("Firebase недоступен");
+        }
+    } catch (error) {
+        console.error("Ошибка загрузки идей:", error);
+        // Резервный вариант с демо-данными
+        const demoIdeas = getDemoIdeas().slice(0, 3);
+        displayIdeas(demoIdeas, ideasContainer);
+    }
+}
+
 // Обновление интерфейса в зависимости от статуса авторизации
 function updateUIForAuth(user) {
     const loginBtn = document.getElementById('loginBtn');
