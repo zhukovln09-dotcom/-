@@ -1,11 +1,11 @@
 // Конфигурация Firebase
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCtxtlRNWJMAeP7XP8qigh58RVW7xycdTs",
+    authDomain: "iamvery-619e2.firebaseapp.com",
+    projectId: "iamvery-619e2",
+    storageBucket: "iamvery-619e2.firebasestorage.app",
+    messagingSenderId: "255451655193",
+    appId: "1:255451655193:web:a4be0ca1ef2902d37a8e88"
 };
 
 // Инициализация Firebase
